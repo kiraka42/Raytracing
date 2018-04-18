@@ -1,0 +1,71 @@
+camera
+  distance 3000
+  angle 0.8
+end
+
+ambient 0.7
+
+light
+  rotation 0,0,pi/4
+  intensity 0.7
+end
+
+object barrex = box
+  center 0,0,0
+  length 1000,100,100
+  kd 0.6
+  ks 1
+  phong 2
+  color 50,250,50
+end
+
+object barrey = box
+  center 0,0,0
+  length 100,800,100
+  kd 0.6
+  ks 1
+  phong 2
+  color 250,50,50
+end
+
+object barrez = box
+  center 0,0,0
+  length 100,100,800
+  kd 0.6
+  ks 1
+  phong 2
+  color 50,50,250
+end
+
+put translate barrez by 450,450,0 end
+put translate barrez by 450,-450,0 end
+put translate barrez by -450,450,0 end
+put translate barrez by -450,-450,0 end
+
+put translate barrey by 450,0,450 end
+put translate barrey by 450,0,-450 end
+put translate barrey by -450,0,450 end
+put translate barrey by -450,0,-450 end
+
+put translate barrex by 0,450,450 end
+put translate barrex by 0,450,-450 end
+put translate barrex by 0,-450,450 end
+put translate barrex by 0,-450,-450 end
+
+put sphere
+  center -500+20*time,0,0
+  radius 400
+  kd 0.6
+  ks 1
+  phong 1
+  color 250,250,50
+end
+
+put plane
+  rotation -0.1,0,0
+  shift -1500
+  kd 0.3
+  ks 0.6
+  phong 4
+  color 200,200,200
+end          

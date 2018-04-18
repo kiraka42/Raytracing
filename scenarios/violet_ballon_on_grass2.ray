@@ -1,0 +1,38 @@
+camera
+  distance 60
+  angle 0.7
+end
+
+ambient 0.0
+
+light
+  rotation 1,0,0
+  intensity 1
+end
+
+put sphere
+  center 0,22,0
+  radius 10
+  kd 0.8
+  ks 0.0
+  phong 2
+  color 240,0,240
+end
+ 
+put plane
+  rotation 0.4,0.0,0.0
+  shift 0
+  kd 0.8
+  ks 0.0
+  phong 1.5
+  color 0,200,0
+end
+
+
+
+
+
+
+
+
+

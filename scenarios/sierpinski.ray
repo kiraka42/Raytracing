@@ -1,0 +1,77 @@
+camera
+  distance 10000-110*time
+  angle 1.0
+end
+
+ambient 0.3
+
+light
+  rotation 0,-0.2,-1.4
+  intensity 0.7
+end
+
+light
+  rotation 1.4,-0.2,0
+  intensity 0.7
+end
+
+proc cube (cx,cy,cz,l,n)
+  if n = 0
+  then
+    put box
+      center cx,cy,cz
+      length 2*l,2*l,2*l
+      kd 0.6
+      ks 0.8
+      phong 1
+      color 150,50,50
+    end
+  else
+    let sh = 2 * l / 3
+    let ll = l / 3
+    let nn = n - 1
+    # étage supérieur
+    cube(cx-sh,cy+sh,cz-sh,ll,nn)
+    cube(cx   ,cy+sh,cz-sh,ll,nn)
+    cube(cx+sh,cy+sh,cz-sh,ll,nn)
+    cube(cx-sh,cy+sh,cz   ,ll,nn)
+    cube(cx+sh,cy+sh,cz   ,ll,nn)
+    cube(cx-sh,cy+sh,cz+sh,ll,nn)
+    cube(cx   ,cy+sh,cz+sh,ll,nn)
+    cube(cx+sh,cy+sh,cz+sh,ll,nn)
+    # étage inférieur
+    cube(cx-sh,cy-sh,cz-sh,ll,nn)
+    cube(cx   ,cy-sh,cz-sh,ll,nn)
+    cube(cx+sh,cy-sh,cz-sh,ll,nn)
+    cube(cx-sh,cy-sh,cz   ,ll,nn)
+    cube(cx+sh,cy-sh,cz   ,ll,nn)
+    cube(cx-sh,cy-sh,cz+sh,ll,nn)
+    cube(cx   ,cy-sh,cz+sh,ll,nn)
+    cube(cx+sh,cy-sh,cz+sh,ll,nn)
+    # étage central
+    cube(cx+sh,cy   ,cz+sh,ll,nn)
+    cube(cx+sh,cy   ,cz-sh,ll,nn)
+    cube(cx-sh,cy   ,cz+sh,ll,nn)
+    cube(cx-sh,cy   ,cz-sh,ll,nn)
+  end
+end
+
+put plane
+  rotation 0.08,0.0,0.0
+  shift -800
+  kd 0.5
+  ks 0.6
+  phong 1
+  color 200,200,200
+end
+
+put plane
+  rotation 0.00,0.08,1.57
+  shift -300
+  kd 0.5
+  ks 0.6
+  phong 1
+  color 200,200,200
+end
+
+cube(-2500,300,0,1000,2)

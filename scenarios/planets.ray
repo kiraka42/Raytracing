@@ -1,0 +1,108 @@
+# un soleil avec une terre et une lune. On obtient une animation en faisant
+# varier la valeur de la variable "time" de 1 à 100
+
+camera
+  distance 30000
+  angle 0.8
+end
+
+ambient 0.0
+
+# lumière venant d'en haut à gauche, légèrement par le devant
+light
+  rotation pi/8,0,pi/4
+  intensity 0.7
+end
+
+# lumière venant d'en haut à droite, légèrement par le devant
+light
+  rotation pi/8,0,-pi/4
+  intensity 0.7
+end
+
+## Si on veut faire une seule image de cette animation, choisir une valeur
+## particuliere pour time:
+#let time = 10
+
+# un miroir horizontal
+put plane
+  rotation 0,0,0
+  shift -4100
+  kd 0.4
+  ks 0.6
+  phong 10
+  color 200,200,200
+end
+
+# un miroir vertical
+object miroir = box
+  center 0,0,-15000
+  length 50000,10000,15
+  kd 0.4
+  ks 0.6
+  phong 2
+  color 150,150,150
+end
+
+# placer deux copies du miroir vertical à un angle de 90 degrées
+put rotate miroir by 0,pi/4,0 end
+put rotate miroir by 0,-pi/4,0 end
+
+###########################################################
+# le soleil
+###########################################################
+put sphere
+  center 0,0,0
+  radius 4000
+  kd 0.6
+  ks 1
+  phong 2
+  color 239,54,26 # rouge
+end
+
+###########################################################
+# la terre
+###########################################################
+
+let earthr = 8000 # rayon de l'orbite de la terre
+object earth = sphere
+  center 0,0,0
+  radius 1200
+  kd 0.1
+  ks 0.8
+  phong 3
+  color 114,172,216 # bleu
+end
+
+##########################################################
+# la lune
+##########################################################
+let moonr = 1500 # rayon de l'orbite de la lune
+object moon = sphere
+  center 0,0,0
+  radius 200
+  kd 1.0
+  ks 0.3
+  phong 3
+  color 246,255,0 # jaune
+end
+
+##########################################################
+# Le groupe terre-lune
+##########################################################
+
+# orbite de la lune autour de la terre. Trois révolutions complètes sont
+# faites si la variable "time" va de 0 à 99
+object earthmoon = group
+ earth
+ rotate
+    translate moon by moonr,0,0 end
+ by 0,6*pi*time/100,0 end
+ end
+
+# orbite du groupe terre-lune autour du soleil. Une révolution complète
+# est faite si la variable "time" va de 0 à 99
+put
+ rotate
+  translate earthmoon by earthr,0,0 end
+ by 0,2*pi*time/100,0 end
